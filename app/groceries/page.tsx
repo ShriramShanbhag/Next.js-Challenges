@@ -29,4 +29,9 @@ export default async function GroceriesPage() {
     </main>
   );
 }
+// PROBLEM 2 STATEMENT
+// Your Mission
+// Implement Time-Based Revalidation: Modify the fetch call in the code above so that Next.js caches the result, but automatically revalidates (refetches) the data every 3600 seconds (1 hour). Provide the updated getProducts function.
+
+// The Flash Sale Problem: Imagine Tesco suddenly initiates a massive "Flash Sale" on organic produce, changing prices immediately. Your cache is currently set to live for an hour. Conceptually, what Next.js feature would you use to force the cache to update instantly without waiting for the 3600 seconds to expire?
 
