@@ -2,6 +2,7 @@
 'use client';
 
 import { useState } from 'react';
+import { addToCart } from '@/actions/cart';
 
 export const AddToCartButton = ({ productId }: { productId: string }) => {
   const [isAdding, setIsAdding] = useState(false);
@@ -10,7 +11,8 @@ export const AddToCartButton = ({ productId }: { productId: string }) => {
     setIsAdding(true);
     // TODO: We need to securely send this productId to the Tesco backend.
     // We do NOT want to build a separate route in app/api/cart/route.ts.
-    console.log(`Adding ${productId} to cart...`);
+    const res = await addToCart(productId)
+    console.log("Add Response: ", res)
     
     setIsAdding(false);
   };

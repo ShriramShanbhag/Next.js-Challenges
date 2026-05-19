@@ -7,9 +7,9 @@ const getProducts = async ():Promise<Product[]> => {
           { id: '2', name: 'Whole Milk 2L', price: 1.50 },
           { id: '3', name: 'Sourdough Bread', price: 2.00 }
         ];
-    // return new Promise((resolve) => setTimeout(() => resolve(mockData), 1000));
-    let res =  await fetch('https://api.tesco-internal.com/v1/products', { next: { revalidate: 3600 } });
-    return res.json()
+    return new Promise((resolve) => setTimeout(() => resolve(mockData), 1000));
+    // let res =  await fetch('https://api.tesco-internal.com/v1/products', { next: { revalidate: 3600 } });
+    // return res.json()
     
   }
 
