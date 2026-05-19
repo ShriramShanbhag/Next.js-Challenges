@@ -11,9 +11,11 @@ async function getCategoryProducts(category: string): Promise<Product[]> {
 }
 
 // Note: Assume we are using Next.js 15+
-export default async function CategoryPage({ params }: { params: { category: string } }) {
-  const category = params.category; 
+export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
+  const { category } = await params; 
+  // console.log("category: ", category, "Params: ", params)
   const products = await getCategoryProducts(category);
+  console.log("Products: ", products)
 
   return (
     <main>

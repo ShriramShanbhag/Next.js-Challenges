@@ -1,0 +1,22 @@
+.sidebar {
+    height: 100vh;
+    width: 200px;
+    background-color: aliceblue;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.button {
+    width: 90%;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: azure;
+}
