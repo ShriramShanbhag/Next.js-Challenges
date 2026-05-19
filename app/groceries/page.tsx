@@ -7,7 +7,10 @@ const getProducts = async ():Promise<Product[]> => {
           { id: '2', name: 'Whole Milk 2L', price: 1.50 },
           { id: '3', name: 'Sourdough Bread', price: 2.00 }
         ];
-    return new Promise((resolve) => setTimeout(() => resolve(mockData), 1000));
+    // return new Promise((resolve) => setTimeout(() => resolve(mockData), 1000));
+    let res =  await fetch('https://api.tesco-internal.com/v1/products', { next: { revalidate: 3600 } });
+    return res.json()
+    
   }
 
 export default async function GroceriesPage() {
@@ -30,8 +33,13 @@ export default async function GroceriesPage() {
   );
 }
 // PROBLEM 2 STATEMENT
-// Your Mission
-// Implement Time-Based Revalidation: Modify the fetch call in the code above so that Next.js caches the result, but automatically revalidates (refetches) the data every 3600 seconds (1 hour). Provide the updated getProducts function.
 
-// The Flash Sale Problem: Imagine Tesco suddenly initiates a massive "Flash Sale" on organic produce, changing prices immediately. Your cache is currently set to live for an hour. Conceptually, what Next.js feature would you use to force the cache to update instantly without waiting for the 3600 seconds to expire?
+// Your Mission
+// Implement Time-Based Revalidation: Modify the fetch call in the code above so that Next.js caches the result, but automatically revalidates (refetches) the data every 3600 seconds (1 hour). 
+// Provide the updated getProducts function.
+
+// The Flash Sale Problem: 
+// Imagine Tesco suddenly initiates a massive "Flash Sale" on organic produce, 
+// changing prices immediately. Your cache is currently set to live for an hour. 
+// Conceptually, what Next.js feature would you use to force the cache to update instantly without waiting for the 3600 seconds to expire?
 
