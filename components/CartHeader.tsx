@@ -1,14 +1,17 @@
 // components/CartHeader.tsx
 'use client';
 
-import { useState } from 'react';
+import { useOptimistic, useState } from 'react';
+import { startTransition } from 'react';
 import { addToCart } from '@/actions/cart';
 
 export function CartHeader({ initialCount }: { initialCount: number }) {
   // Currently, we wait for the server before updating this count
   const [cartCount, setCartCount] = useState(initialCount);
+  const [optimisticCartCount, addOptimisticCartCount] = useOptimistic(cartCount, (state, addCount: number) => state + addCount)
 
-  const handleAdd = async () => {
+  const handleAdd = () => startTransition(async () => {
+    addOptimisticCartCount(1)
     // 1. We must WAIT 5 seconds for the action to finish...
     const res: any = await addToCart("apple-123");
     
@@ -16,13 +19,13 @@ export function CartHeader({ initialCount }: { initialCount: number }) {
     if (res.status === 200) {
       setCartCount((prev) => prev + 1);
     }
-  };
+  });
 
   return (
     <div className="flex justify-between p-4 bg-gray-100">
       <h1 className="font-bold">Tesco Groceries</h1>
       <div className="flex gap-4">
-        <span>🛒 Cart: {cartCount} items</span>
+        <span>🛒 Cart: {optimisticCartCount} items</span>
         <button onClick={handleAdd} className="bg-blue-600 text-white px-2 py-1 rounded">
           Buy Apple
         </button>
