@@ -1,4 +1,5 @@
 import { AddToCartButton } from '@/components/AddToCartButton';
+import { CartHeader } from '@/components/CartHeader';
 import { Product } from '@/types';
 
 const getProducts = async ():Promise<Product[]> => {
@@ -20,6 +21,7 @@ export default async function GroceriesPage() {
   return (
     <main className="p-8">
       <h1 className="text-2xl font-bold mb-6">Fresh Groceries</h1>
+      <CartHeader initialCount={0}/>
       <div className="grid grid-cols-4 gap-4">
         {products.map((product) => (
           <div key={product.id} className="border p-4 rounded-lg shadow-sm">
